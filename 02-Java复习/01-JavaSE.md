@@ -37,6 +37,18 @@ if(sc.hasNextInt()){ //sc.hasNextDouble();
 
 - 使用`hasNext`判断
 
+  - 循环判断
+
+    ```java
+    Scanner scanner = new Scanner(System.in);
+    int n = 0;
+    while(!scanner.hasNextInt()){
+        System.out.println("您输错了");
+        scanner.next();
+    }
+    ```
+
+
 
 
 ## chapter4
@@ -46,5 +58,190 @@ if(sc.hasNextInt()){ //sc.hasNextDouble();
 ```java
 // 获取 [0,1) 随机数
 double r = Math.random();
+```
+
+
+
+## chapter5
+
+### Java 中的标号（标签 label）
+
+```java
+标号名称: 循环结构
+```
+
+
+
+## chapter6
+
+### 数组
+
+####  基本数据类型的数组中默认值分别是什么
+
+| 数据类型    | 数组中默认值 |
+| ----------- | ------------ |
+| `byte[]`    | `0`          |
+| `short[]`   | `0`          |
+| `int[]`     | `0`          |
+| `long[]`    | `0`          |
+| `double[]`  | `0.0`        |
+| `float[]`   | `0.0f`       |
+| `boolean[]` | `false`      |
+| `char[]`    | `'\u0000'`   |
+| `String[]`  | `null`       |
+
+
+
+#### 数组拷贝
+
+语法：
+
+```java
+System.arrayCopy(原数组, 拷贝的开始位置, 目标数组, 存放的开始位置, 拷贝的元素个数);
+```
+
+实例：
+
+```java
+System.arraycopy(arr, 0, newArr, 0, count);
+```
+
+#### 数组扩容
+
+语法：
+
+```java
+数据类型[] 标识符 = Arrays.copyOf(原数组, 新数组的长度);
+```
+
+实例：
+
+```java
+String[] newArr = Arrays.copyOf(arr, arr.length + 1);
+```
+
+
+
+## Chapter7
+
+### 数组排序
+
+#### 冒泡排序
+
+自己实现：
+
+```java
+// 冒泡排序：将数列10,70,55,80,25,60进行降序排列
+int[] arr = new int[]{10,70,55,80,25,60};
+// 外圈：排序比较次数
+for(int i = 0; i < arr.length - 1; i ++){
+    // 内侧：每次将最小的数字排到最后面
+    for(int j = 0; j < arr.length - 1 - i; j ++){
+        if(arr[j] < arr[j+1]){
+            int t = arr[j];
+            arr[j] = arr[j+1];
+            arr[j+1] = t;
+        }
+    }
+}
+
+//输出结果看看
+for(int i = 0; i < arr.length; i ++){
+    System.out.print(arr[i]+" ");
+}
+```
+
+##### 工具类`Arryas`：“你好”
+
+```java
+Arrays.sort(数组名); //将数组中的元素进行升序排列
+Arrays.toString(数组名);//将数组中的元素组装为一个字符串
+```
+
+
+
+#### 二分查找（折半查找）
+
+有顺序的前提下才能进行查找。
+
+自己实现：
+
+```java
+// 二分查找、折半查找：从数列95,93,87,86,79,72,60,53中快速找出元素60所处位置
+int[] arr = new int[]{95,93,87,86,79,72,60,53};
+int target = 60;
+
+int left = 0;
+int right = arr.length - 1;
+int middle;
+
+while(left < right){
+    middle = (left + right) / 2;
+    if(arr[middle] == target){
+        System.out.println("目标所在位置： " + middle);
+        return middle;
+    }
+    else if(arr[middle] > target){
+        left = middle + 1;
+    }
+    else if(arr[middle] < target){
+        right = middle - 1;
+    }
+}
+System.out.println("找不到目标");
+return -1;
+```
+
+要小心`left = middle + 1;`和`right = middle - 1;`写反。
+
+### 二维数组
+
+```java
+// 从控制台录入5首音乐信息（包括名称、歌手、出版年月），并将这些信息存储在数组中。
+String[][] music = new String[5][3];
+Scanner scanner = new Scanner(System.in);
+for(int i = 0; i < music.length; i ++){
+    for(int j = 0; j < music[i].length; j ++){
+        music[i][j] = scanner.next();
+    }
+}
+
+System.out.println("[名称, 歌手, 出版年月]");
+for(int i = 0; i < music.length; i ++){
+    System.out.println(Arrays.toString(music[i]));
+}
+```
+
+### 多维数组
+
+```java
+// 某学校一年级共有3个班，第一个班10人，第二个班8人，第三个班7人，现要求从控制台录入这3个班学生的成绩和年龄，并计算出每个班的平均成绩和平均年龄。
+
+Scanner scanner = new Scanner(System.in);
+double[][][] classrooms = new double[3][][];
+classrooms[0] = new double[10][2];
+classrooms[1] = new double[8][2];
+classrooms[2] = new double[7][2];
+for(int k = 0; k < classrooms.length; k ++){
+    System.out.println("输入第" + (k + 1) + "个班的成绩和年龄：");
+    System.out.println("[成绩, 年龄]");
+    for(int i = 0; i < classrooms[k].length; i ++){
+        for(int j = 0; j < classrooms[k][i].length; j ++){
+            classrooms[k][i][j] = scanner.nextDouble();
+        }
+    }
+}
+
+for(int k = 0; k < classrooms.length; k ++){
+    double averScore = 0;
+    double averAge = 0;
+    for(int i = 0; i < classrooms[k].length; i ++){
+        averScore += classrooms[k][i][0];
+        averAge += classrooms[k][i][1];
+    }
+    averScore /= classrooms[k].length;
+    averAge /= classrooms[k].length;
+    System.out.println("第" + (k + 1) + "个班的平均成绩和平均年龄分别为：" + averScore + "\t" + averAge);
+}
 ```
 
