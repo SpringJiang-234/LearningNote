@@ -361,11 +361,21 @@ for(int k = 0; k < classrooms.length; k ++){
 
 ### 编译时多态
 
+体现在方法重载
+
 ### 运行时多态
+
+体现在方法重写
 
 #### 虚拟方法调用
 
 #### `instanceof` 运算符
+
+##### 语法
+
+```java
+对象名 instanceof 类名; 
+```
 
 - 主要应用在类型的强制转换上面
 - 对转换的目标类型进行检测，如果是，则进行强制转换。这样可以保证程序的正常运行。
@@ -471,3 +481,62 @@ protected void finalize() throws Throwable
 
 - finalize() 方法的调用依赖于 JVM 的垃圾回收机制，而 System.gc() 只是建议 JVM 进行垃圾回收，并不保证立即执行。
 - 因此，finalize() 可能不会在程序退出前被调用，导致你看不到日志输出。
+
+
+
+## chapter15 异常
+
+### 异常体系
+
+#### 继承关系
+
+- `Throwable`：所有异常的父类。常用方法：
+
+  ```java
+  public Throwable();//构造方法
+  public Throwable(String message);//构造方法
+  public String getMessage();//获取异常发生的原因
+  public void printStackTrace(); //打印异常在栈中的轨迹信息
+  ```
+
+  
+
+  - `Error`
+  - `Exception`
+    - `RuntimeException`
+    - `Checked Exception`
+
+### 异常处理
+
+#### 五个关键字
+
+`throw` 、`throws`、`try`、`catch`、`finally`
+
+### 自定义异常
+
+#### 实例
+
+```java
+/**
+ * 用户名不存在异常
+ *
+ * 异常命名规范：场景描述+Exception
+ */
+public class UsernameNotFoundException extends Exception{
+    public UsernameNotFoundException(){}
+    public UsernameNotFoundException(String msg){
+        super(msg);
+    }
+}
+```
+
+### 异常使用注意
+
+- 运行时异常可以不处理。 
+- 如果父类抛出了多个异常,子类覆盖父类方法时,只能抛出相同的异常或者是该异常的子集。(与协变返回类型原理一致) 
+- 父类方法没有抛出异常，子类覆盖父类该方法时也不可抛出检查异常。此时子类产生该异常，只能捕获处理，不能声明抛出
+
+
+
+## chapter16 字符串
+
