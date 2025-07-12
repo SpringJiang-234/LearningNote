@@ -565,11 +565,11 @@ public String(byte bytes[], Charset charset);//指定字符集
 Charset charset = Charset.forName("UTF-8");
 ```
 
-#### 常用方法
+#### 常用方法（特别常用：★）
 
 ##### 返回`int`类型
 
-###### 获取长度
+###### ★获取长度
 
 ```java
 public int length();
@@ -585,9 +585,11 @@ public int indexOf(String str);
 public int lastIndexOf(String str);
 ```
 
+
+
 ##### 返回`boolean`类型
 
-###### 字符串比较
+###### ★字符串比较
 
 ```java
 // 比较两个字符串是否相同（区分大小写）
@@ -616,6 +618,8 @@ public int lastIndexOf(int ch);
 public boolean matches(String regex);
 ```
 
+
+
 ##### 返回`String`或`String[]`类型
 
 ###### 字符串大小写转换
@@ -625,7 +629,7 @@ public String toLowerCase(); // 将字符串转换为小写
 public String toUpperCase(); // 将字符串转换为大写
 ```
 
-###### 字符串截取方法
+###### ★字符串截取方法
 
 ```java
 // 从指定位置截取到字符串末尾
@@ -646,7 +650,7 @@ public String replace(CharSequence target, CharSequence replacement);
 public String replaceAll(String regex, String replacement);
 ```
 
-###### 字符串拼接
+###### ★字符串拼接
 
 ```java
 public String concat(String str);//将字符串追加到末尾
@@ -658,16 +662,18 @@ public String concat(String str);//将字符串追加到末尾
 public String trim();
 ```
 
-###### 字符串分割
+###### ★字符串分割
 
 ```java
 //将字符串按照匹配的正则表达式分割
 public String[] split(String regex);
 ```
 
+
+
 ##### 返回`char`或`char[]`或`byte[]`类型
 
-###### 获取指定位置字符
+###### ★获取指定位置字符
 ```java
 // 获取特定索引的字符
 public char charAt(int index);
@@ -687,6 +693,8 @@ public byte[] getBytes();
 // 获取指定编码下的字节数组
 public byte[] getBytes(Charset charset);
 ```
+
+
 
 ##### 检查字符串常量池
 
