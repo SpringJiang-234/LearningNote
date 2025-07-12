@@ -540,3 +540,164 @@ public class UsernameNotFoundException extends Exception{
 
 ## chapter16 字符串
 
+### `String`
+
+#### `String`类特性
+
+- 无需引用直接使用（因为位于`java.lang`包中）
+- `final`修饰，最终类
+- 对象不可再被更改
+
+#### 常用构造方法
+
+```java
+public String(String original);
+public String(char value[]);
+public String(char value[], int offset, int count);
+public String(byte bytes[]);
+public String(byte bytes[], int offset, int length);
+public String(byte bytes[], Charset charset);//指定字符集
+```
+
+##### 构建UTF-8字符集
+
+```java
+Charset charset = Charset.forName("UTF-8");
+```
+
+#### 常用方法
+
+##### 返回`int`类型
+
+###### 获取长度
+
+```java
+public int length();
+```
+
+###### 子串位置查找
+
+```java
+// 返回子串第一次出现的起始索引
+public int indexOf(String str);
+
+// 返回子串最后一次出现的起始索引
+public int lastIndexOf(String str);
+```
+
+##### 返回`boolean`类型
+
+###### 字符串比较
+
+```java
+// 比较两个字符串是否相同（区分大小写）
+public boolean equals(Object anObject);
+
+// 忽略大小写比较两个字符串是否相同
+public boolean equalsIgnoreCase(String anotherString); 
+```
+
+###### 字符位置查找
+
+```java
+// 查找字符位置（返回索引，从0开始）
+
+// 返回字符第一次出现的索引，未找到返回-1
+public int indexOf(int ch);
+
+// 返回字符最后一次出现的索引，未找到返回-1
+public int lastIndexOf(int ch);
+```
+
+###### 字符串匹配正则表达式
+
+```java
+//检测字符串是否匹配给定的正则表达式
+public boolean matches(String regex);
+```
+
+##### 返回`String`或`String[]`类型
+
+###### 字符串大小写转换
+
+```java
+public String toLowerCase(); // 将字符串转换为小写
+public String toUpperCase(); // 将字符串转换为大写
+```
+
+###### 字符串截取方法
+
+```java
+// 从指定位置截取到字符串末尾
+public String substring(int beginIndex);
+
+// 截取指定区间字符串（左闭右开）
+public String substring(int beginIndex, int endIndex);
+```
+
+###### 字符串替换
+
+```java
+// 字符替换
+public String replace(char oldChar, char newChar);
+// 字符串替换
+public String replace(CharSequence target, CharSequence replacement);
+// 正则替换
+public String replaceAll(String regex, String replacement);
+```
+
+###### 字符串拼接
+
+```java
+public String concat(String str);//将字符串追加到末尾
+```
+
+###### 去除字符串两端的空白字符
+
+```java
+public String trim();
+```
+
+###### 字符串分割
+
+```java
+//将字符串按照匹配的正则表达式分割
+public String[] split(String regex);
+```
+
+##### 返回`char`或`char[]`或`byte[]`类型
+
+###### 获取指定位置字符
+```java
+// 获取特定索引的字符
+public char charAt(int index);
+```
+
+###### 获取字符数组
+
+```java
+public char[] toCharArray();
+```
+
+###### 获取字节数组
+
+```java
+// 获取字节数组
+public byte[] getBytes();
+// 获取指定编码下的字节数组
+public byte[] getBytes(Charset charset);
+```
+
+##### 检查字符串常量池
+
+```java
+public native String intern();
+```
+
+###### 示例
+
+```java
+/*将字符串s3放入字符串常量池，放入时会先检测常量池中是否存在s3字符串，如果字符串常量池中存在字符串s3，那么s5直接使用常量池中的s3字符串地址即可。如果不存在，则在常量池中创建字符串s3*/
+String s5 = s3.intern();
+```
+
