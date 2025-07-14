@@ -709,3 +709,83 @@ public native String intern();
 String s5 = s3.intern();
 ```
 
+
+
+### `StringBuilder`和`StringBuffer`
+
+#### 特性
+
+- 无需引用直接使用（因为位于`java.lang`包中）
+- `final`修饰，最终类
+- 对象可以实现字符序列的追加，不会产生新的对象，只是将这个字符序列保存在字符数组中
+
+#### 常用构造方法
+
+```java
+public StringBuilder(); //构建一个StringBuilder对象，默认容量为16
+
+public StringBuilder(int capacity);//构建一个StringBuilder对象并指定初始化容量
+
+public StringBuilder(String str); //构建一个StringBuilder对象，并将指定的字符串存储在其中
+```
+
+#### 常用方法
+
+##### 返回`StringBuilder`类型
+
+###### ★追加
+
+```java
+//将一个字符串添加到StringBuilder存储区
+public StringBuilder append(String str);
+
+//将StringBuffer存储的内容添加StringBuilder存储区
+public StringBuilder append(StringBuffer sb);
+```
+
+###### 删除指定区间存储的内容
+
+```java
+//将StringBuilder存储区指定的开始位置到指定的结束位置之间的内容删除掉
+public StringBuilder delete(int start, int end);
+```
+
+###### 删除存储区指定下标位置存储的字符
+
+```java
+public StringBuilder deleteCharAt(int index);
+```
+
+###### 在StringBuilder存储区指定偏移位置处插入指定的字符串
+
+```java
+public StringBuilder insert(int offset, String str);
+```
+
+###### 将存储区的内容倒序
+
+```java
+public StringBuilder reverse();
+```
+
+##### 返回`int`类型
+
+###### 获取指定字符串在存储区中的位置
+
+```java
+//获取指定字符串在存储区中第一次出现的位置
+public int indexOf(String str); 
+
+//获取指定字符串在存储区中最后一次出现的位置
+public int lastIndexOf(String str);
+```
+
+### 对比
+
+- 少量字符串：
+  - `String`、`StringBuilder`和`StringBuffer`都是用来处理字符串的。在处理少量字符串的时候，它们之间的处理效率几乎没有任何区别。
+- 处理大量字符串：
+  - `String`类的对象不可再更改，因此在处理字符串时会产生新的对象，对于内存的消耗来说较大，导致效率低下。
+  - `StringBuilder`和`StringBuffer`使用的是对字符串的字符数组内容进行拷贝，不会产生新的对象，因此效率较高。
+- 多线程：
+  - `StringBuffer`为了保证在多线程情况下字符数组中内容的正确使用，在每一个成员方法上面加了锁，有锁就会增加消耗，因此`StringBuffer`在处理效率上要略低于`StringBuilder`。
